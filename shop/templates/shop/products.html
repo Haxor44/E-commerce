@@ -1,0 +1,21 @@
+{% extends 'shop/index.html' %}
+{% load static %}
+{% block content %}
+<div class="listing-section">
+	{% for product in products %}
+  <div class="product">
+    <div class="image-box">
+      <div class="images" id="image-1"></div>
+    </div>
+    <div class="text-box">
+      <h2 class="item">{{product.title}}</h2>
+      <h3 class="price">${{product.price}}</h3>
+      <p class="description">{{product.description}}</p>
+      <button data-product={{product.id}} data-action="add" class="btn btn-primary update-cart">Add To Cart</button>
+    </div>
+  </div>
+  {% endfor %}
+  </div>
+</div>
+</div>
+{% endblock content %}

@@ -1,0 +1,55 @@
+{% extends 'shop/index.html' %}
+{% load static %}
+{% block content %}
+	<div class="container1">
+  <h1>Shipping</h1>
+  <p>Please enter your shipping details.</p>
+  <hr />
+  <div class="form" id="form">
+    
+  <div class="fields fields--2">
+    <label class="field">
+      <span class="field__label" for="firstname">First name</span>
+      <input class="field__input" type="text" id="firstname" value="John" />
+    </label>
+    <label class="field">
+      <span class="field__label" for="lastname">Last name</span>
+      <input class="field__input" type="text" id="lastname" value="Doe" />
+    </label>
+  </div>
+  <label class="field">
+    <span class="field__label" for="address">Address</span>
+    <input class="field__input" type="text" id="address" />
+  </label>
+  <label class="field">
+    <span class="field__label" for="county">County</span>
+    <select class="field__input" id="county">
+      <option value=""></option>
+      <option value="nakuru">Nakuru</option>
+    </select>
+  </label>
+  <div class="fields fields--3">
+    <label class="field">
+      <span class="field__label" for="zipcode">Zip code</span>
+      <input class="field__input" type="text" id="zipcode" />
+    </label>
+    <label class="field">
+      <span class="field__label" for="city">City</span>
+      <input class="field__input" type="text" id="city" />
+    </label>
+  </div>
+  </div>
+  <hr>
+  <button type="submit" class="button btn-warning" id="frm-btn">Continue To Paypal</button>
+</div>
+
+<script type="text/javascript">
+	document.getElementById('frm-btn').addEventListener('click',function(e){
+		submitForm()
+	})
+
+	function submitForm(){
+		console.log("Submitting data")
+	}
+</script>
+{%endblock content%}

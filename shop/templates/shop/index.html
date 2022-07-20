@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Ec</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'shop/style.css' %}">
+
+
+</head>
+<body>
+  {%if user.is_authenticated%}
+	<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'index' %}"> <h3>Dawa</h3></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a href="{% url 'products' %}"class="nav-link">Products</a>
+        </li>
+        <li class="nav-item">   
+        <a href="{% url 'cart' %}">
+          {%load static %}
+          <img  id="cart-icon" src="{% static 'shop/images/cart.png' %}" width="25" height="25"><span class="badge" id="cart-total">{{cartItems}}</span>
+        </a>
+      </li>
+       <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        </li>
+
+    </ul>
+  </div>
+</div>
+</nav>
+      {% else %}
+      <nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'index' %}"> <h3>Dawa</h3></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a href="{% url 'products' %}"class="nav-link">Products</a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'login' %}"class="btn btn-primary">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'register' %}">Signup</a>
+        </li>
+        <li class="nav-item">   
+        <a href="{% url 'cart' %}">
+          {%load static %}
+          <img  id="cart-icon" src="{% static 'shop/images/cart.png' %}" width="25" height="25"><span class="badge" id="cart-total">{{cartItems}}</span>
+        </a>
+      </li>
+        </ul>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+  </div>
+</div>
+</nav>
+{% endif %}
+{%block content%}
+<section>
+	<div>
+		<header>
+			<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active" data-bs-interval="10000">
+      {% load static %} <img class="d-block w-100" src="{% static "shop/images/med3.jpg" %}" alt="paracetamol" />
+      <div class="carousel-caption d-none d-md-block">
+        <h5>First slide label</h5>
+        <p>Some representative placeholder content for the first slide.</p>
+      </div>
+    </div>
+    <div class="carousel-item" data-bs-interval="2000">
+      {% load static %} <img class="d-block w-100" src="{% static "shop/images/med2.jpg" %}" alt="paracetamol" />
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Second slide label</h5>
+        <p>Some representative placeholder content for the second slide.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      {% load static %} <img class="d-block w-100" src="{% static "shop/images/med5.jpg" %}" alt="paracetamol" />
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Third slide label</h5>
+        <p>Some representative placeholder content for the third slide.</p>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+	
+		</header>
+	</div>
+	
+</section>
+
+<section>
+    <div class="listing-section">
+  {% for product in products %}
+  <div class="product">
+    <div class="image-box">
+      {% load static %} <img class="card-img-top" src="{% static "shop/images/para.jpg" %}" alt="paracetamol" />
+    </div>
+    <div class="text-box">
+      <h2 class="item">{{product.title}}</h2>
+      <h3 class="price">${{product.price}}</h3>
+      <p class="description">{{product.description}}</p>
+      <button data-product={{product.id}} data-action="add" class="btn btn-primary update-cart">Add To Cart</button>
+    </div>
+  </div>
+  {% endfor %}
+  </div>
+</div>
+</section>
+{% endblock content %}
+
+<footer class="footer-distributed">
+
+      <div class="footer-left">
+
+        <h3><span>Dawa</span></h3>
+
+        <p class="footer-links">
+          <a href="#" class="link-1">Home</a>
+          
+          <a href="#">Blog</a>
+        
+          <a href="#">Pricing</a>
+        
+          <a href="#">About</a>
+          
+          <a href="#">Faq</a>
+          
+          <a href="#">Contact</a>
+        </p>
+
+        <p class="footer-company-name">Dawa © 2022</p>
+      </div>
+
+      <div class="footer-center">
+
+        <div>
+          <i class="fa fa-map-marker"></i>
+          <p><span>Nakuru</span> Nakuru</p>
+        </div>
+
+        <div>
+          <i class="fa fa-phone"></i>
+          <p>+254703214928</p>
+        </div>
+
+        <div>
+          <i class="fa fa-envelope"></i>
+          <p><a href="mailto:support@company.com">dawa@dawa.com</a></p>
+        </div>
+
+      </div>
+
+      <div class="footer-right">
+
+        <p class="footer-company-about">
+          <span>About the company</span>
+          Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
+        </p>
+
+      </div>
+
+    </footer>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  {%load static%}<script type="text/javascript" src="{% static "shop/js/cart.js" %}"></script>
+  <script type="text/javascript">
+    var user = '{{request.user}}'
+    function getToken(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+const csrftoken = getToken('csrftoken');
+</script>
+</body>
+</html>

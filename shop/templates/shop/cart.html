@@ -1,0 +1,66 @@
+{% extends 'shop/index.html' %}
+{% load static %}
+{% block content %}
+	<section class="mt-5">
+        <div class="container">
+            <div class="cart">
+            <div class="table-responsive">
+                <h3>Order Summary</h3>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col"class="text-white">Product</th>
+                            <th scope="col"class="text-white">Price</th>
+                            <th scope="col"class="text-white">Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    	<th><h5>Products</h5></th>
+                        <th><h5>Quantity<h5></th>
+                        <th><h5>Price<h5></th>
+                        {% for item in items %}
+                        <tr>
+                            <td>
+                                <div class="main">
+                                    <div class="d-flex">
+                     <!--W=145 H=98--> <img src="images/cart-1.jpg"alt="">
+                                    </div>
+                                    <div class="des">
+                                        <p>{{item.product.title}}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <h6>{{item.quantity}}</h6>
+                            </td>
+                            <td>
+                                <h6>${{item.product.price|floatformat:2}}</h6>
+                            </td>
+                            <td><button data-product={{item.product.id}} data-action="add" class="btn btn-primary update-cart">ADD</button></td>
+                            <td><button data-product={{item.product.id}} data-action="remove" class="btn btn-danger update-cart">REMOVE</button></td>
+                        </tr>
+                        {% endfor %}
+                        <!----->
+                        
+                        <!----->
+                 
+                        <!----->
+                        <div class="checkout">
+            <ul>
+                <li class="cart-total">Total
+                <span>${{order.get_cart_total|floatformat:2}}</span></li>
+            </ul>
+            <a href="{% url 'checkout' %}"class="btn btn-warning">Proceed to Checkout</a>
+        </div>
+                    </tbody>
+
+                </table>
+            </div>
+            </div>
+        </div>
+        <div class="col-lg-4 offset-lg-4">
+        
+    </div>
+    </section>
+
+{% endblock content %}
