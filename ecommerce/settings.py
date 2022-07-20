@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-d=y(#u^4h*kmnor68a4mb8@pfme(@1qxr5z(*5i6^1$2gi(evi'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['dawa-app.herokuapp.com','127.0.0.1']
 
 
 # Application definition
@@ -87,7 +87,14 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-   
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'Dawa',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
 }
 
 
