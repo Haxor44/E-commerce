@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-d=y(#u^4h*kmnor68a4mb8@pfme(@1qxr5z(*5i6^1$2gi(evi
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['dawa-app.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['dawa-app.herokuapp.com','dawa-app2.herokuapp.com','127.0.0.1']
 
 
 # Application definition
@@ -54,7 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    #"debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 INTERNAL_IPS = [
