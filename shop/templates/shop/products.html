@@ -5,7 +5,7 @@
 	{% for product in products %}
   <div class="product">
     <div class="image-box">
-      <div class="images" id="image-1"></div>
+      {% load static %} <img class="card-img-top" src="{% static "shop/images/para.jpg" %}" alt="paracetamol" />
     </div>
     <div class="text-box">
       <h2 class="item">{{product.title}}</h2>
