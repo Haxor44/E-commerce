@@ -37,11 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
-    'djoser',
     'accounts',
     'shop',
-    'debug_toolbar',
+    #'debug_toolbar',
     'core',
 ]
 
