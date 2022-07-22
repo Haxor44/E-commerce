@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 import json
 from .forms import CreateUser
+from .models import Customer
 
 # Create your views here.
 def index(request):
@@ -53,12 +54,17 @@ def products(request):
 	return render(request,"shop/products.html", {"products":queryset1,"cartItems":cartItems})
 
 def registerPage(request):
+	customer = Customer()
 	form = CreateUser()
+
 
 	if request.method == 'POST':
 		form = CreateUser(request.POST)
 		if form.is_valid():
-			form.save()
+			#form.save()
+			customer.user = form.save()
+			customer.save()
+
 			messages.success(request,"Account was created successfully")
 			return redirect('login')
 	context={'form':form}
