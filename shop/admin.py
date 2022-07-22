@@ -22,4 +22,4 @@ class OrderAdmin(admin.ModelAdmin):
 
 @admin.register(models.Customer)
 class CustomerAdmin(admin.ModelAdmin):
-	list_display  = ['user','first_name','last_name','email','phone','birth_date']
+	list_display  = ['user','first_name','last_name','phone','birth_date']
