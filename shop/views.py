@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 import json
 from .forms import CreateUser
-from .models import Customer
+from .models import Customer,Product
 
 # Create your views here.
 def index(request):
@@ -52,6 +52,16 @@ def products(request):
 
 	queryset1 = Product.objects.all()
 	return render(request,"shop/products.html", {"products":queryset1,"cartItems":cartItems})
+
+def search(request):
+	if request.method == 'POST':
+		searched = request.POST['search']
+
+		products = Product.objects.filter(title__icontains=searched)
+		return render(request,"shop/search.html",{"products":products})
+
+	else:
+		return render(request,"shop/search.html",{})
 
 def registerPage(request):
 	customer = Customer()

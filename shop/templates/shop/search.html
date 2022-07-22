@@ -1,6 +1,8 @@
 {% extends 'shop/index.html' %}
 {% load static %}
 {% block content %}
+
+{% if searched%}
 <div class="listing-section">
 	{% for product in products %}
   <div class="product">
@@ -16,4 +18,8 @@
   </div>
   {% endfor %}
   </div>
-{% endblock content %}
+  {% else %}
+  <h2>You need a pound to keep the account open</h2>
+  {% endif %}
+
+{% endblock content%}
