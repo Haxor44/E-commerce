@@ -58,7 +58,7 @@ def search(request):
 		searched = request.POST['search']
 
 		products = Product.objects.filter(title__icontains=searched)
-		return render(request,"shop/search.html",{"products":products})
+		return render(request,"shop/search.html",{"products":products,"searched":searched})
 
 	else:
 		return render(request,"shop/search.html",{})
