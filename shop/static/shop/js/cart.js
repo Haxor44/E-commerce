@@ -18,6 +18,7 @@ function updateUserOrder(productId,action){
 	console.log("USer logged in")
 	//Url for sending post data
 	//var url = '/update_item/'
+	//why?
 
 	fetch('https://dawa-app.herokuapp.com/shop/update_item/',{
 		method:'POST',
