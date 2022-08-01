@@ -5,18 +5,14 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+import datetime
 import json
 from .forms import CreateUser
-from .models import Customer,Product
+from .models import Customer,Product,ShippingAddress
+
 
 # Create your views here.
 def index(request):
-	#customer with accounts ending in .com
-	#queryset = Customer.objects.filter(email__endswith=".com")
-
-	#collections that don't have a featured product
-	#exists = Collection.objects.filter(featured_product__isnull=True)
-
 	if request.user.is_authenticated:
 
 		customer = request.user.customer
@@ -160,5 +156,25 @@ def updateItem(request):
 		orderItem.delete()
 	return JsonResponse("Item Added",safe=False)
 
+def completeOrder(request):
+	print('Data ', request.body)
+	data = json.loads(request.body)
+	transaction_id = datetime.datetime.now().timestamp()
+
+	if request.user.is_authenticated:
+		customer = request.user.customer
+		order, created = Order.objects.get_or_create(customer=customer,complete=False)
+		total = float(data['shipping']['total'])
+		order.transaction_id = transaction_id
+
+		if total == order.get_cart_total:
+			order.complete = True
+		order.save()
+
+		ShippingAddress.objects.create(customer=customer,order=order,address=data['shipping']['address'],city=data['shipping']['city'],state=data['shipping']['county'],zipcode=data['shipping']['zip'])
 
 
+	else:
+		print("USer is not logged in!!!")
+
+	return JsonResponse("Order Completed!!!", safe=False)

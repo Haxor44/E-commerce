@@ -5,51 +5,127 @@
   <h1>Shipping</h1>
   <p>Please enter your shipping details.</p>
   <hr />
-  <div class="form" id="form">
+  <form method="POST" action="" id="form">
+    {%csrf_token%}
+  <div class="form">
     
   <div class="fields fields--2">
-    <label class="field">
-      <span class="field__label" for="firstname">First name</span>
-      <input class="field__input" type="text" id="firstname" value="John" />
-    </label>
-    <label class="field">
-      <span class="field__label" for="lastname">Last name</span>
-      <input class="field__input" type="text" id="lastname" value="Doe" />
-    </label>
-  </div>
-  <label class="field">
+     <label class="field">
     <span class="field__label" for="address">Address</span>
-    <input class="field__input" type="text" id="address" />
+    <input class="field__input" type="text" id="address" name="address" />
   </label>
   <label class="field">
     <span class="field__label" for="county">County</span>
-    <select class="field__input" id="county">
-      <option value=""></option>
-      <option value="nakuru">Nakuru</option>
-    </select>
+    <input class="field__input" type="text" id="county" name="county" />
   </label>
+  </div>
   <div class="fields fields--3">
     <label class="field">
       <span class="field__label" for="zipcode">Zip code</span>
-      <input class="field__input" type="text" id="zipcode" />
+      <input class="field__input" type="text" id="zipcode" name="zip" />
     </label>
     <label class="field">
       <span class="field__label" for="city">City</span>
-      <input class="field__input" type="text" id="city" />
+      <input class="field__input" type="text" id="city" name="city" />
     </label>
   </div>
   </div>
   <hr>
-  <button type="submit" class="button btn-warning" id="frm-btn">Continue To Paypal</button>
+  <button type="submit" class="button btn-warning" id="frm-btn">Save</button>
+  <div class="hidden" id="payment">
+    <div id="paypal-button-container"></div>
+  </div>
+  </form>
 </div>
 
+    <!-- Include the PayPal JavaScript SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AasXnRNH0G-e8UkkSz3bDUX12qm8mhWRETLy-Fv5HeTBOsl1plt8msY3ImfL2XkZ3jTnZbPLeppSKoIy&currency=USD"></script>
+
+    <script>
+        var total = '{{order.get_cart_total}}'
+        // Render the PayPal button into #paypal-button-container
+        paypal.Buttons({
+
+            // Set up the transaction
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: parseFloat(total).toFixed(2)
+                        }
+                    }]
+                });
+            },
+
+            // Finalize the transaction
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(orderData) {
+                    // Successful capture! For demo purposes:
+                    console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                    var transaction = orderData.purchase_units[0].payments.captures[0];
+                    submitForm()
+
+                    // Replace the above to show a success message within this page, e.g.
+                    // const element = document.getElementById('paypal-button-container');
+                    // element.innerHTML = '';
+                    // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                    // Or go to another URL:  actions.redirect('thank_you.html');
+                });
+            }
+
+
+        }).render('#paypal-button-container');
+    </script>
+
+
+
 <script type="text/javascript">
-	document.getElementById('frm-btn').addEventListener('click',function(e){
-		submitForm()
-	})
+  console.log(total)
+
+  var form = document.getElementById('form')
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault()
+    document.getElementById('frm-btn').classList.add('hidden')
+    document.getElementById('payment').classList.remove('hidden')
+    document.getElementById('payment2').classList.remove('hidden')
+
+    //
+  })
 
 	function submitForm(){
+
 		console.log("Submitting data")
+
+
+    var shipData = {
+      'address':null,
+      'county':null,
+      'zip':null,
+      'city':null,
+      'total':total
+    }
+
+    shipData.address = form.address.value
+    shipData.county = form.county.value
+    shipData.zip = form.zip.value
+    shipData.city = form.city.value
+
+    fetch('https://dawa-app.herokuapp.com/complete_order/',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'X-CSRFToken':csrftoken
+      },
+      body:JSON.stringify({"shipping":shipData})
+    })
+
+    .then((response) => {response.json()})
+    .then((data)=>{
+      console.log("Success:",data);
+      alert("Transaction Completed Successfully!!!");
+      window.location.href = "{% url 'index' %}"
+    })
 	}
 </script>
 {%endblock content%}
