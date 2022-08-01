@@ -8,6 +8,7 @@ class Product(models.Model):
     description = models.TextField()
     price = models.DecimalField(max_digits=6, decimal_places=2)
     inventory = models.IntegerField()
+    image = models.ImageField(null=True,blank=True)
     
 
 class Customer(models.Model):

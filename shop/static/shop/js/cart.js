@@ -19,7 +19,7 @@ function updateUserOrder(productId,action){
 	//Url for sending post data
 	//var url = '/update_item/'
 
-	fetch('http://127.0.0.1:8000/shop/update_item/',{
+	fetch('https://dawa-app.herokuapp.com/update_item/',{
 		method:'POST',
 		headers:{
 			'Content-Type':'application/json',

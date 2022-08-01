@@ -135,7 +135,7 @@
   {% for product in products %}
   <div class="product">
     <div class="image-box">
-      {% load static %} <img class="card-img-top" src="{% static "shop/images/para.jpg" %}" alt="paracetamol" />
+      {% load static %} <img class="card-img-top" src="{{product.image.url}}" alt="paracetamol" width="150" height="150" />
     </div>
     <div class="text-box">
       <h2 class="item">{{product.title}}</h2>
