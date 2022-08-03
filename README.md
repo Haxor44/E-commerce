@@ -19,7 +19,7 @@ The install the necessary requirements<br>
 pip install -r requirements
 
 # Demo<br/>
-https://dawa-app2.herokuapp.com/shop/<br/>
+https://dawa-app.herokuapp.com/shop/<br/>
 
 # Technologies Used<br/>
 Django,sqlite,heroku,javascript,html,css<br>
