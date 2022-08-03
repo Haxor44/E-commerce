@@ -24,5 +24,9 @@ https://dawa-app.herokuapp.com/shop/<br/>
 # Technologies Used<br/>
 Django,sqlite,heroku,javascript,html,css<br>
 
+# Upcoming Features<br/>
+Adding MPESA<br/>
+Email verification<br/>
+
 # Support<br>
 contact me through evolmalek04@gmail.com
